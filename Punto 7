@@ -1,73 +1,68 @@
-# Punto – Costo de Fumigación de Cosechas
+Punto 7
+Costo de Fumigación de Cosechas
 
-## Enunciado
-Desarrollar un algoritmo que calcule el costo total que debe pagar un granjero por fumigar sus tierras,
-considerando el tipo de fumigación solicitada, la cantidad de hectáreas a fumigar, descuentos por grandes
-superficies y descuentos adicionales si el monto supera ciertos límites.
+Objetivo
+Calcular el costo total que debe pagar un granjero por la fumigación de sus tierras.
 
----
+Reglas
+- Tipo 1: malas hierbas -> 10 dólares por hectárea
+- Tipo 2: langostas -> 15 dólares por hectárea
+- Tipo 3: gusanos -> 20 dólares por hectárea
+- Tipo 4: todas las anteriores -> 30 dólares por hectárea
+- Área mayor a 1000 -> descuento del 5%
+- Exceso sobre 3000 -> descuento del 10%
 
-## Definición de variables
+1) Definición de variables
 
-### Variables de entrada
-- `nombre` : cadena  
-  Nombre del granjero que solicita la fumigación.
+Entrada
+- nombre : cadena
+- tipo : entero
+- hectareas : real
 
-- `tipo` : entero  
-  Tipo de fumigación solicitada (1, 2, 3 o 4).
+Proceso
+- precioHectarea
+- costoBase
+- costoFinal
 
-- `hectareas` : real  
-  Número de hectáreas a fumigar.
+Salida
+- nombre
+- costoFinal
+```
 
-### Variables de proceso
-- `precioHectarea` : real  
-  Valor a cobrar por hectárea según el tipo de fumigación.
-
-- `costoBase` : real  
-  Costo inicial de la fumigación antes de aplicar descuentos.
-
-- `costoFinal` : real  
-  Valor final a pagar luego de aplicar los descuentos correspondientes.
-
-### Variables de salida
-- `nombre`  
-- `costoFinal`
-
----
-
-## Pseudocódigo
+## 2) Pseudocódigo
 
 ```text
-Inicio
-  Leer nombre
-  Leer tipo
-  Leer hectareas
+Algoritmo FumigacionCosechas
+    Leer nombre
+    Leer tipo
+    Leer hectareas
 
-  Segun tipo hacer
-    1: precioHectarea <- 10
-    2: precioHectarea <- 15
-    3: precioHectarea <- 20
-    4: precioHectarea <- 30
-  FinSegun
+    Segun tipo hacer
+        1: precioHectarea <- 10
+        2: precioHectarea <- 15
+        3: precioHectarea <- 20
+        4: precioHectarea <- 30
+    FinSegun
 
-  costoBase <- precioHectarea * hectareas
+    costoBase <- precioHectarea * hectareas
 
-  Si hectareas > 1000 Entonces
-     costoBase <- costoBase * 0.95
-  FinSi
+    Si hectareas > 1000 Entonces
+        costoBase <- costoBase * 0.95
+    FinSi
 
-  Si costoBase > 3000 Entonces
-     descuentoMonto <- (costoBase - 3000) * 0.10
-     costoFinal <- costoBase - descuentoMonto
-  SiNo
-     costoFinal <- costoBase
-  FinSi
+    Si costoBase > 3000 Entonces
+        costoFinal <- costoBase - ((costoBase - 3000) * 0.10)
+    SiNo
+        costoFinal <- costoBase
+    FinSi
 
-  Mostrar nombre
-  Mostrar costoFinal
-Fin
+    Escribir "Granjero: ", nombre
+    Escribir "Valor a pagar: ", costoFinal
+FinAlgoritmo
 
 
+
+```md
 ## Diagrama de flujo
 
 ```mermaid
@@ -87,8 +82,41 @@ flowchart TD
     H -- No --> J[Calcular costo final]
 
     I --> J
-    J --> K[Mostrar nombre y costo]
+    J --> K[Mostrar nombre y valor a pagar]
     K --> Z[Fin]
 
+### ✅ PASO 4: PRUEBA DE ESCRITORIO (COMO CÓDIGO)
+Debajo del diagrama:
 
+```md
+## Prueba de escritorio
+
+```text
+Caso de prueba
+Granjero: Pedro
+Tipo de fumigación: 4
+Hectáreas: 1200
+
+Paso 1:
+Precio por hectárea = 30
+
+Paso 2:
+Costo base = 30 * 1200 = 36000
+
+Paso 3:
+Aplicar descuento por área (5%)
+Costo tras descuento = 36000 * 0.95 = 34200
+
+Paso 4:
+Exceso sobre 3000 = 34200 - 3000 = 31200
+
+Paso 5:
+Descuento por monto (10%)
+Descuento = 3120
+
+Paso 6:
+Costo final = 34200 - 3120 = 31080
+
+Resultado:
+El granjero Pedro debe pagar 31.080 dólares
 
