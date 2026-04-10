@@ -1,0 +1,94 @@
+# Punto – Costo de Fumigación de Cosechas
+
+## Enunciado
+Desarrollar un algoritmo que calcule el costo total que debe pagar un granjero por fumigar sus tierras,
+considerando el tipo de fumigación solicitada, la cantidad de hectáreas a fumigar, descuentos por grandes
+superficies y descuentos adicionales si el monto supera ciertos límites.
+
+---
+
+## Definición de variables
+
+### Variables de entrada
+- `nombre` : cadena  
+  Nombre del granjero que solicita la fumigación.
+
+- `tipo` : entero  
+  Tipo de fumigación solicitada (1, 2, 3 o 4).
+
+- `hectareas` : real  
+  Número de hectáreas a fumigar.
+
+### Variables de proceso
+- `precioHectarea` : real  
+  Valor a cobrar por hectárea según el tipo de fumigación.
+
+- `costoBase` : real  
+  Costo inicial de la fumigación antes de aplicar descuentos.
+
+- `costoFinal` : real  
+  Valor final a pagar luego de aplicar los descuentos correspondientes.
+
+### Variables de salida
+- `nombre`  
+- `costoFinal`
+
+---
+
+## Pseudocódigo
+
+```text
+Inicio
+  Leer nombre
+  Leer tipo
+  Leer hectareas
+
+  Segun tipo hacer
+    1: precioHectarea <- 10
+    2: precioHectarea <- 15
+    3: precioHectarea <- 20
+    4: precioHectarea <- 30
+  FinSegun
+
+  costoBase <- precioHectarea * hectareas
+
+  Si hectareas > 1000 Entonces
+     costoBase <- costoBase * 0.95
+  FinSi
+
+  Si costoBase > 3000 Entonces
+     descuentoMonto <- (costoBase - 3000) * 0.10
+     costoFinal <- costoBase - descuentoMonto
+  SiNo
+     costoFinal <- costoBase
+  FinSi
+
+  Mostrar nombre
+  Mostrar costoFinal
+Fin
+
+
+## Diagrama de flujo
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B[Leer nombre, tipo, hectareas]
+    B --> C[Asignar precio por tipo]
+    C --> D[Calcular costo base]
+
+    D --> E{Hectareas > 1000}
+    E -- Si --> F[Aplicar descuento por area]
+    E -- No --> G[Continuar]
+
+    F --> H{Costo > 3000}
+    G --> H
+
+    H -- Si --> I[Aplicar descuento por monto]
+    H -- No --> J[Calcular costo final]
+
+    I --> J
+    J --> K[Mostrar nombre y costo]
+    K --> Z[Fin]
+
+
+
