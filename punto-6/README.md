@@ -86,45 +86,43 @@ Algoritmo NominaEmpleados
         Escribir "Total a pagar: $", totalPagar
     FinPara
 FinAlgoritmo
-
-## ✅ 3️⃣ Luego deja el diagrama ASÍ (exacto)
-
-```md
+```
 ## Diagrama de flujo
 
 ```mermaid
 flowchart TD
-    A([Inicio]) --> B[/Leer n (cantidad de empleados)/]
+    A[Inicio] --> B[Leer n empleados]
     B --> C[i = 1]
 
-    C --> D{¿i <= n?}
-    D -- No --> Z([Fin])
+    C --> D{i <= n}
+    D -- No --> Z[Fin]
 
-    D -- Sí --> E[/Leer nombre, hijos, salarioHora, horasMes/]
-    E --> F[devengado = salarioHora * horasMes]
-    F --> G[subsidio = hijos * 1200]
+    D -- Si --> E[Leer nombre, hijos, salarioHora, horasMes]
+    E --> F[Calcular salario devengado]
+    F --> G[Calcular subsidio por hijos]
 
-    G --> H{¿devengado < 300000?}
+    G --> H{Salario < 300000}
 
-    H -- Sí --> I{¿hijos > 6?}
-    I -- Sí --> J[porcentajeRet = 0]
-    I -- No --> K[porcentajeRet = ((6 - hijos)/2)/100]
+    H -- Si --> I{Hijos > 6}
+    I -- Si --> J[Retencion = 0]
+    I -- No --> K[Retencion proporcional]
 
-    H -- No --> M{¿hijos < 3?}
-    M -- Sí --> N[porcentajeRet = 0.03]
-    M -- No --> O[porcentajeRet = (10/hijos)/100]
+    H -- No --> M{Hijos < 3}
+    M -- Si --> N[Retencion = 3%]
+    M -- No --> O[Retencion segun hijos]
 
-    J --> L[retencion = devengado * porcentajeRet]
+    J --> L[Aplicar retencion]
     K --> L
     N --> L
     O --> L
 
-    L --> P[totalPagar = devengado - retencion + subsidio]
-    P --> Q[Mostrar resultados del empleado]
+    L --> P[Calcular total a pagar]
+    P --> Q[Mostrar resultados]
     Q --> R[i = i + 1]
     R --> D
 
 
+```
 
 ## Prueba de escritorio
 
